@@ -1,5 +1,6 @@
 // ============================================================
 // M7 COMMUNICATION - MAIN.JS
+// Version corrigée
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
