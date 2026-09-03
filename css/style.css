@@ -1,6 +1,5 @@
 /* ============================================================
    M7 COMMUNICATION - STYLE PRINCIPAL
-   Couleurs : Blanc (#FFFFFF) | Bleu roi (#1A3A6B / #2C3E91)
    ============================================================ */
 
 * {
@@ -101,6 +100,7 @@ h1, h2, h3, h4 {
     color: var(--bleu-clair);
 }
 
+/* ---------- BOUTONS ---------- */
 .btn {
     display: inline-flex;
     align-items: center;
@@ -159,14 +159,14 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   HEADER & NAVIGATION
+   HEADER
    ============================================================ */
 .header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 9999;
     background: rgba(255, 255, 255, 0.97);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
@@ -219,6 +219,7 @@ h1, h2, h3, h4 {
     margin-left: 8px;
 }
 
+/* Menu Desktop */
 .nav-menu {
     display: flex;
     align-items: center;
@@ -253,27 +254,6 @@ h1, h2, h3, h4 {
     border-radius: 4px;
 }
 
-/* Hamburger - caché sur desktop */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    padding: 8px;
-    background: transparent;
-    border: none;
-    z-index: 1001;
-}
-
-.hamburger .bar {
-    display: block;
-    width: 28px;
-    height: 3px;
-    background: var(--bleu-roi);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-}
-
 /* ============================================================
    HERO
    ============================================================ */
@@ -290,9 +270,8 @@ h1, h2, h3, h4 {
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: 
-        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 40%);
+    background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                 radial-gradient(circle at 80% 80%, rgba(255,255,255,0.03) 0%, transparent 40%);
     pointer-events: none;
 }
 
@@ -489,7 +468,7 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================================
-   ACTIONS JEUNESSE
+   ACTIONS JEUNESSE (Accueil)
    ============================================================ */
 .youth-actions {
     background: var(--blanc);
@@ -734,42 +713,4 @@ h1, h2, h3, h4 {
 .footer-col ul li a {
     color: rgba(255, 255, 255, 0.7);
     transition: 0.3s ease;
-    font-size: 0.95rem;
-}
-
-.footer-col ul li a:hover {
-    color: #6A9BD8;
-    padding-left: 4px;
-}
-
-.footer-contact li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.95rem;
-    margin-bottom: 12px;
-}
-
-.footer-contact li i {
-    color: #6A9BD8;
-    width: 18px;
-    text-align: center;
-}
-
-.footer-bottom {
-    padding-top: 24px;
-    text-align: center;
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.5);
-}
-
-.footer-bottom strong {
-    color: var(--blanc);
-}
-
-.footer-credit {
-    display: block;
-    margin-top: 4px;
-    font-size: 0.85rem;
-}
+    font-size: 0.95rem
