@@ -8,7 +8,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        /* Styles du menu mobile */
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(44, 62, 145, 0.15); }
+            50% { box-shadow: 0 0 40px rgba(44, 62, 145, 0.3); }
+        }
+
+        .animate-fadeUp {
+            opacity: 0;
+            animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeLeft {
+            opacity: 0;
+            animation: fadeInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeRight {
+            opacity: 0;
+            animation: fadeInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-scale {
+            opacity: 0;
+            animation: scaleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-glow {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* ========== LOGO IMAGE ========== */
+        .logo-img {
+            height: 55px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .logo-img { height: 42px; }
+        }
+
+        /* ========== MENU MOBILE ========== */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -24,13 +85,14 @@
             margin: 5px 0;
             background: #1A3A6B;
             border-radius: 4px;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .hamburger.active .bar:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
         .hamburger.active .bar:nth-child(2) {
             opacity: 0;
+            transform: translateX(-10px);
         }
         .hamburger.active .bar:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
@@ -47,11 +109,11 @@
                 background: #FFFFFF !important;
                 flex-direction: column !important;
                 padding: 80px 25px 25px !important;
-                transition: right 0.4s ease !important;
-                box-shadow: -5px 0 30px rgba(0,0,0,0.15) !important;
+                transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+                box-shadow: -5px 0 40px rgba(0,0,0,0.15) !important;
                 z-index: 9998 !important;
                 display: flex !important;
-                border-radius: 0 0 0 12px !important;
+                border-radius: 0 0 0 16px !important;
                 max-height: 420px !important;
                 overflow-y: auto !important;
             }
@@ -82,8 +144,21 @@
                 height: 100%;
                 background: rgba(0,0,0,0.4);
                 z-index: 9997;
+                animation: overlayFade 0.3s ease;
             }
             .nav-overlay.active { display: block; }
+            @keyframes overlayFade {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
+
+        /* ========== AMÉLIORATIONS UI/UX ========== */
+        .about-card {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+        }
+        .about-card:hover {
+            transform: translateY(-6px);
         }
     </style>
 </head>
@@ -94,17 +169,16 @@
         <nav class="navbar">
             <div class="container nav-container">
                 <a href="../index.html" class="logo">
-                    <span class="logo-m">M</span><span class="logo-7">7</span>
-                    <span class="logo-text">COMMUNICATION</span>
+                    <img src="../images/logo.jpg" alt="M7 COMMUNICATION" class="logo-img">
                 </a>
                 <span class="logo-slogan">Événements &amp; Marketing - Gaoua, BF</span>
 
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="../index.html">Accueil</a></li>
-                    <li><a href="apropos.html" class="active">À propos</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="evenements.html">Événements</a></li>
                     <li><a href="actions-jeunesse.html">Actions Jeunesse</a></li>
+                     <li><a href="services.html">Services</a></li>
+                    <li><a href="evenements.html">Événements</a></li>
+                    <li><a href="apropos.html" class="active">À propos</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
 
@@ -120,21 +194,62 @@
     <main>
         <section style="padding:140px 0 60px;background:linear-gradient(135deg,#0B1F3B,#1A3A6B);color:white;text-align:center;">
             <div class="container">
-                <h1 style="font-size:2.8rem;font-weight:800;">À propos de <span style="color:#6A9BD8;">M7</span></h1>
-                <p style="font-size:1.2rem;opacity:0.9;max-width:700px;margin:0 auto;">Découvrez l'histoire, la mission et les valeurs de notre agence.</p>
+                <h1 style="font-size:2.8rem;font-weight:800;" class="animate-fadeUp">À propos de <span style="color:#6A9BD8;">M7</span></h1>
+                <p style="font-size:1.2rem;opacity:0.9;max-width:700px;margin:0 auto;" class="animate-fadeUp delay-1">Découvrez l'histoire, la mission et les valeurs de notre agence.</p>
             </div>
         </section>
 
         <section class="section-padding">
             <div class="container">
-                <div style="max-width:800px;margin:0 auto;text-align:center;">
-                    <h2 style="font-size:2rem;color:#1A3A6B;margin-bottom:20px;">Notre <span class="highlight">Histoire</span></h2>
-                    <p style="font-size:1.05rem;line-height:1.9;color:#555;margin-bottom:16px;">
-                        <strong>M7 COMMUNICATION</strong> est née de la passion de son fondateur, <strong>Prince M7</strong>, pour la communication, le sport et le développement de la jeunesse burkinabè.
-                    </p>
-                    <p style="font-size:1.05rem;line-height:1.9;color:#555;">
-                        Basée à <strong>Gaoua</strong>, dans la région du Sud-Ouest, notre agence s'est rapidement imposée comme un acteur incontournable de l'organisation d'événements, du marketing digital et de la promotion des talents locaux.
-                    </p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+                    <div class="animate-fadeLeft">
+                        <h2 style="font-size:2rem;color:#1A3A6B;margin-bottom:20px;">Notre <span class="highlight">Histoire</span></h2>
+                        <p style="font-size:1.05rem;line-height:1.9;color:#555;margin-bottom:16px;">
+                            <strong>M7 COMMUNICATION</strong> est née de la passion de son fondateur, <strong>Prince M7</strong>, pour la communication, le sport et le développement de la jeunesse burkinabè.
+                        </p>
+                        <p style="font-size:1.05rem;line-height:1.9;color:#555;">
+                            Basée à <strong>Gaoua</strong>, dans la région du Sud-Ouest, notre agence s'est rapidement imposée comme un acteur incontournable de l'organisation d'événements, du marketing digital et de la promotion des talents locaux.
+                        </p>
+                    </div>
+                    <div style="background:#F5F7FA;border-radius:16px;padding:40px;text-align:center;border:2px solid rgba(26,58,107,0.08);" class="animate-fadeRight animate-glow">
+                        <i class="fas fa-quote-left" style="font-size:3rem;color:#2C3E91;opacity:0.2;"></i>
+                        <p style="font-size:1.3rem;font-style:italic;color:#1A3A6B;font-weight:600;margin:16px 0;">
+                            "Construire l'avenir de la jeunesse burkinabè à travers l'événementiel et la communication."
+                        </p>
+                        <p style="color:#888;">— Prince M7, Fondateur</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background:#F5F7FA;padding:80px 0;">
+            <div class="container">
+                <div class="section-header animate-fadeUp">
+                    <h2>Notre <span class="highlight">Mission</span></h2>
+                    <p class="section-subtitle">Ce qui nous anime au quotidien</p>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:30px;">
+                    <div style="background:white;padding:32px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.06);text-align:center;" class="about-card animate-scale delay-1">
+                        <div style="width:70px;height:70px;background:rgba(26,58,107,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;color:#2C3E91;">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3 style="color:#1A3A6B;margin-bottom:10px;">Mission</h3>
+                        <p style="color:#666;">Organiser des événements de qualité qui rassemblent, inspirent et créent un impact positif.</p>
+                    </div>
+                    <div style="background:white;padding:32px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.06);text-align:center;" class="about-card animate-scale delay-2">
+                        <div style="width:70px;height:70px;background:rgba(26,58,107,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;color:#2C3E91;">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h3 style="color:#1A3A6B;margin-bottom:10px;">Valeurs</h3>
+                        <p style="color:#666;">Intégrité, excellence, engagement, innovation et solidarité. Des valeurs qui guident nos actions.</p>
+                    </div>
+                    <div style="background:white;padding:32px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.06);text-align:center;" class="about-card animate-scale delay-3">
+                        <div style="width:70px;height:70px;background:rgba(26,58,107,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:2rem;color:#2C3E91;">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3 style="color:#1A3A6B;margin-bottom:10px;">Vision</h3>
+                        <p style="color:#666;">Devenir la référence en matière d'événementiel et de communication au Burkina Faso.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -145,8 +260,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <span class="logo-m">M</span><span class="logo-7">7</span>
-                        <span class="logo-text">COMMUNICATION</span>
+                        <img src="../images/logo.jpg" alt="M7 COMMUNICATION" style="height:50px;width:auto;filter:brightness(0) invert(1);">
                     </div>
                     <p class="footer-desc">Agence événementielle et marketing digital basée à Gaoua, Burkina Faso.</p>
                     <div class="footer-social">
@@ -160,10 +274,10 @@
                     <h4>Liens rapides</h4>
                     <ul>
                         <li><a href="../index.html">Accueil</a></li>
-                        <li><a href="apropos.html">À propos</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="evenements.html">Événements</a></li>
                         <li><a href="actions-jeunesse.html">Actions Jeunesse</a></li>
+                         <li><a href="services.html">Services</a></li>
+                        <li><a href="evenements.html">Événements</a></li>
+                        <li><a href="apropos.html">À propos</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -184,23 +298,19 @@
     </footer>
 
     <script>
-        // Script du menu (identique pour toutes les pages)
         (function() {
             function initMenu() {
                 var hamburger = document.getElementById('hamburgerBtn');
                 var navMenu = document.getElementById('navMenu');
                 var overlay = document.getElementById('navOverlay');
                 var navLinks = document.querySelectorAll('.nav-menu a');
-                
                 if (!hamburger || !navMenu) return;
-                
                 function closeMenu() {
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
                     if (overlay) overlay.classList.remove('active');
                     document.body.style.overflow = '';
                 }
-                
                 function toggleMenu() {
                     if (navMenu.classList.contains('active')) {
                         closeMenu();
@@ -211,25 +321,11 @@
                         document.body.style.overflow = 'hidden';
                     }
                 }
-                
-                hamburger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-                
-                if (overlay) {
-                    overlay.addEventListener('click', closeMenu);
-                }
-                
-                navLinks.forEach(function(link) {
-                    link.addEventListener('click', closeMenu);
-                });
-                
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') closeMenu();
-                });
+                hamburger.addEventListener('click', function(e) { e.stopPropagation(); toggleMenu(); });
+                if (overlay) overlay.addEventListener('click', closeMenu);
+                navLinks.forEach(function(link) { link.addEventListener('click', closeMenu); });
+                document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeMenu(); });
             }
-            
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initMenu);
             } else {
