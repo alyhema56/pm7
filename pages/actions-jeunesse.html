@@ -2,14 +2,41 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Actions Jeunesse - M7 COMMUNICATION | Gaoua, Burkina Faso</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/responsive.css">
+    <style>
+        .hamburger { display: none; cursor: pointer; padding: 10px; z-index: 9999; background: transparent; border: none; }
+        .hamburger .bar { display: block; width: 28px; height: 3px; margin: 5px 0; background: #1A3A6B; border-radius: 4px; transition: 0.3s; }
+        .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+        @media (max-width: 768px) {
+            .hamburger { display: block !important; }
+            .nav-menu { position: fixed !important; top: 0 !important; right: -320px !important; width: 280px !important; max-width: 80% !important; height: auto !important; background: #FFFFFF !important; flex-direction: column !important; padding: 80px 25px 25px !important; transition: right 0.4s ease !important; box-shadow: -5px 0 30px rgba(0,0,0,0.15) !important; z-index: 9998 !important; display: flex !important; border-radius: 0 0 0 12px !important; max-height: 420px !important; overflow-y: auto !important; }
+            .nav-menu.active { right: 0 !important; }
+            .nav-menu li { width: 100% !important; }
+            .nav-menu li a { display: block !important; padding: 12px 16px !important; font-size: 1rem !important; font-weight: 600 !important; color: #333 !important; border-radius: 8px !important; border-left: 3px solid transparent !important; transition: 0.3s !important; }
+            .nav-menu li a:hover, .nav-menu li a.active { color: #2C3E91 !important; background: #f0f4ff !important; border-left-color: #2C3E91 !important; }
+            .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 9997; }
+            .nav-overlay.active { display: block; }
+            .actions-grid-page { grid-template-columns: 1fr !important; gap: 16px !important; }
+        }
+        .actions-grid-page { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 1100px; margin: 0 auto; }
+        .action-item { background: #F5F7FA; border-radius: 12px; padding: 32px; border-left: 6px solid #2C3E91; box-shadow: 0 4px 15px rgba(0,0,0,0.06); }
+        .action-item .header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+        .action-item .header i { font-size: 2.2rem; color: #2C3E91; }
+        .action-item .header h3 { color: #1A3A6B; font-size: 1.3rem; margin: 0; }
+        .action-item p { color: #555; line-height: 1.8; margin-bottom: 12px; }
+        .action-item ul { color: #555; line-height: 2.2; padding-left: 0; list-style: none; }
+        .action-item ul li i { color: #2C3E91; margin-right: 10px; }
+    </style>
 </head>
 <body>
+    <div class="nav-overlay" id="navOverlay"></div>
+
     <header class="header">
         <nav class="navbar">
             <div class="container nav-container">
@@ -19,7 +46,7 @@
                 </a>
                 <span class="logo-slogan">Événements &amp; Marketing - Gaoua, BF</span>
 
-                <ul class="nav-menu">
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="../index.html">Accueil</a></li>
                     <li><a href="apropos.html">À propos</a></li>
                     <li><a href="services.html">Services</a></li>
@@ -28,11 +55,11 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
 
-                <div class="hamburger">
+                <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
                     <span class="bar"></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -51,68 +78,60 @@
                     <h2>Notre <span class="highlight">Engagement</span></h2>
                     <p class="section-subtitle" style="max-width:800px;margin:8px auto 0;">
                         Chez <strong>M7 COMMUNICATION</strong>, nous croyons que la jeunesse est l'avenir du Burkina Faso. 
-                        C'est pourquoi nous avons développé des programmes concrets pour accompagner les jeunes de <strong>Gaoua</strong> et de toute la région du Sud-Ouest.
+                        C'est pourquoi nous avons développé des programmes concrets pour accompagner les jeunes de <strong>Gaoua</strong>.
                     </p>
                 </div>
 
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:1100px;margin:0 auto;">
-                    <div style="background:#F5F7FA;border-radius:12px;padding:32px;border-left:6px solid #2C3E91;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-                            <i class="fas fa-graduation-cap" style="font-size:2.2rem;color:#2C3E91;"></i>
-                            <h3 style="color:#1A3A6B;font-size:1.3rem;margin:0;">Formations professionnelles</h3>
+                <div class="actions-grid-page">
+                    <div class="action-item">
+                        <div class="header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <h3>Formations professionnelles</h3>
                         </div>
-                        <p style="color:#555;line-height:1.8;margin-bottom:12px;">
-                            Nous organisons régulièrement des ateliers de formation en <strong>communication</strong>, <strong>marketing digital</strong>, <strong>gestion d'événements</strong> et <strong>entrepreneuriat</strong>.
-                        </p>
-                        <ul style="color:#555;line-height:2.2;padding-left:0;list-style:none;">
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Formation en communication</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Ateliers marketing digital</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Gestion de projet événementiel</li>
+                        <p>Nous organisons régulièrement des ateliers de formation en <strong>communication</strong>, <strong>marketing digital</strong>, <strong>gestion d'événements</strong>.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Formation en communication</li>
+                            <li><i class="fas fa-check-circle"></i> Ateliers marketing digital</li>
+                            <li><i class="fas fa-check-circle"></i> Gestion de projet événementiel</li>
                         </ul>
                     </div>
 
-                    <div style="background:#F5F7FA;border-radius:12px;padding:32px;border-left:6px solid #2C3E91;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-                            <i class="fas fa-hand-holding-heart" style="font-size:2.2rem;color:#2C3E91;"></i>
-                            <h3 style="color:#1A3A6B;font-size:1.3rem;margin:0;">Bourses d'études</h3>
+                    <div class="action-item">
+                        <div class="header">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <h3>Bourses d'études</h3>
                         </div>
-                        <p style="color:#555;line-height:1.8;margin-bottom:12px;">
-                            Nous soutenons les <strong>étudiants méritants</strong> du Sud-Ouest en leur offrant des bourses pour leur permettre d'accéder à l'éducation supérieure.
-                        </p>
-                        <ul style="color:#555;line-height:2.2;padding-left:0;list-style:none;">
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Bourses pour étudiants méritants</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Soutien aux filières scientifiques</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Accompagnement pédagogique</li>
+                        <p>Nous soutenons les <strong>étudiants méritants</strong> du Sud-Ouest en leur offrant des bourses pour l'éducation supérieure.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Bourses pour étudiants méritants</li>
+                            <li><i class="fas fa-check-circle"></i> Soutien aux filières scientifiques</li>
+                            <li><i class="fas fa-check-circle"></i> Accompagnement pédagogique</li>
                         </ul>
                     </div>
 
-                    <div style="background:#F5F7FA;border-radius:12px;padding:32px;border-left:6px solid #2C3E91;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-                            <i class="fas fa-running" style="font-size:2.2rem;color:#2C3E91;"></i>
-                            <h3 style="color:#1A3A6B;font-size:1.3rem;margin:0;">Sport et Citoyenneté</h3>
+                    <div class="action-item">
+                        <div class="header">
+                            <i class="fas fa-running"></i>
+                            <h3>Sport et Citoyenneté</h3>
                         </div>
-                        <p style="color:#555;line-height:1.8;margin-bottom:12px;">
-                            À travers nos événements sportifs, nous promouvons l'<strong>esprit d'équipe</strong>, la <strong>cohésion sociale</strong> et les valeurs citoyennes.
-                        </p>
-                        <ul style="color:#555;line-height:2.2;padding-left:0;list-style:none;">
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Tournois de football inter-quartiers</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Compétitions sportives</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Ateliers sur le civisme</li>
+                        <p>À travers nos événements sportifs, nous promouvons l'<strong>esprit d'équipe</strong> et la <strong>cohésion sociale</strong>.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Tournois de football inter-quartiers</li>
+                            <li><i class="fas fa-check-circle"></i> Compétitions sportives</li>
+                            <li><i class="fas fa-check-circle"></i> Ateliers sur le civisme</li>
                         </ul>
                     </div>
 
-                    <div style="background:#F5F7FA;border-radius:12px;padding:32px;border-left:6px solid #2C3E91;box-shadow:0 4px 15px rgba(0,0,0,0.06);">
-                        <div style="display:flex;align-items:center;gap:16px;margin-bottom:12px;">
-                            <i class="fas fa-bullhorn" style="font-size:2.2rem;color:#2C3E91;"></i>
-                            <h3 style="color:#1A3A6B;font-size:1.3rem;margin:0;">Entrepreneuriat Jeune</h3>
+                    <div class="action-item">
+                        <div class="header">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Entrepreneuriat Jeune</h3>
                         </div>
-                        <p style="color:#555;line-height:1.8;margin-bottom:12px;">
-                            Nous accompagnons les <strong>porteurs de projets</strong> et les jeunes entrepreneurs en les mettant en réseau avec des <strong>partenaires locaux</strong>.
-                        </p>
-                        <ul style="color:#555;line-height:2.2;padding-left:0;list-style:none;">
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Accompagnement de projets</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Mise en réseau avec des partenaires</li>
-                            <li><i class="fas fa-check-circle" style="color:#2C3E91;margin-right:10px;"></i> Conseils en gestion d'entreprise</li>
+                        <p>Nous accompagnons les <strong>porteurs de projets</strong> et les jeunes entrepreneurs en les mettant en réseau.</p>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> Accompagnement de projets</li>
+                            <li><i class="fas fa-check-circle"></i> Mise en réseau avec des partenaires</li>
+                            <li><i class="fas fa-check-circle"></i> Conseils en gestion d'entreprise</li>
                         </ul>
                     </div>
                 </div>
@@ -136,7 +155,6 @@
                         <a href="#"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-
                 <div class="footer-col">
                     <h4>Liens rapides</h4>
                     <ul>
@@ -148,7 +166,6 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
                     <h4>Contact</h4>
                     <ul class="footer-contact">
@@ -159,14 +176,16 @@
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2026 <strong>M7 COMMUNICATION</strong> - Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="../js/main.js"></script>
-    <script src="../js/animations.js"></script>
-</body>
-</html>
+    <script>
+        (function() {
+            function initMenu() {
+                var hamburger = document.getElementById('hamburgerBtn');
+                var navMenu = document.getElementById('navMenu');
+                var overlay = document.getElementById('navOverlay');
+                var navLinks = document.querySelectorAll('.
