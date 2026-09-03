@@ -8,32 +8,168 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-fadeUp {
+            opacity: 0;
+            animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeLeft {
+            opacity: 0;
+            animation: fadeInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeRight {
+            opacity: 0;
+            animation: fadeInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-scale {
+            opacity: 0;
+            animation: scaleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover { transform: scale(1.05); }
+        @media (max-width: 768px) { .logo-img { height: 42px; } }
+
         .hamburger { display: none; cursor: pointer; padding: 10px; z-index: 9999; background: transparent; border: none; }
-        .hamburger .bar { display: block; width: 28px; height: 3px; margin: 5px 0; background: #1A3A6B; border-radius: 4px; transition: 0.3s; }
+        .hamburger .bar { display: block; width: 28px; height: 3px; margin: 5px 0; background: #1A3A6B; border-radius: 4px; transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
         .hamburger.active .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-        .hamburger.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger.active .bar:nth-child(2) { opacity: 0; transform: translateX(-10px); }
         .hamburger.active .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
         @media (max-width: 768px) {
             .hamburger { display: block !important; }
-            .nav-menu { position: fixed !important; top: 0 !important; right: -320px !important; width: 280px !important; max-width: 80% !important; height: auto !important; background: #FFFFFF !important; flex-direction: column !important; padding: 80px 25px 25px !important; transition: right 0.4s ease !important; box-shadow: -5px 0 30px rgba(0,0,0,0.15) !important; z-index: 9998 !important; display: flex !important; border-radius: 0 0 0 12px !important; max-height: 420px !important; overflow-y: auto !important; }
+            .nav-menu {
+                position: fixed !important;
+                top: 0 !important;
+                right: -320px !important;
+                width: 280px !important;
+                max-width: 80% !important;
+                height: auto !important;
+                background: #FFFFFF !important;
+                flex-direction: column !important;
+                padding: 80px 25px 25px !important;
+                transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+                box-shadow: -5px 0 40px rgba(0,0,0,0.15) !important;
+                z-index: 9998 !important;
+                display: flex !important;
+                border-radius: 0 0 0 16px !important;
+                max-height: 420px !important;
+                overflow-y: auto !important;
+            }
             .nav-menu.active { right: 0 !important; }
             .nav-menu li { width: 100% !important; }
             .nav-menu li a { display: block !important; padding: 12px 16px !important; font-size: 1rem !important; font-weight: 600 !important; color: #333 !important; border-radius: 8px !important; border-left: 3px solid transparent !important; transition: 0.3s !important; }
             .nav-menu li a:hover, .nav-menu li a.active { color: #2C3E91 !important; background: #f0f4ff !important; border-left-color: #2C3E91 !important; }
             .nav-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 9997; }
             .nav-overlay.active { display: block; }
-            .event-grid { grid-template-columns: 1fr !important; gap: 30px !important; }
         }
-        .event-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; margin-bottom: 60px; }
-        .event-grid .badge { display: inline-block; background: #2C3E91; color: white; padding: 4px 16px; border-radius: 30px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
-        .event-grid h2 { font-size: 2.2rem; color: #1A3A6B; margin-bottom: 16px; }
-        .event-grid ul { color: #555; line-height: 2.2; padding-left: 0; list-style: none; }
-        .event-grid ul li i { color: #2C3E91; margin-right: 10px; }
-        .event-image-placeholder { background: #F5F7FA; border-radius: 12px; padding: 30px; text-align: center; border: 2px solid rgba(26,58,107,0.1); }
-        .event-image-placeholder img { border-radius: 8px; width: 100%; height: auto; }
+
+        /* Page événements */
+        .events-page-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        @media (max-width: 992px) {
+            .events-page-grid { grid-template-columns: 1fr 1fr; }
+        }
         @media (max-width: 768px) {
-            .event-grid .order-2 { order: 1 !important; }
-            .event-grid .order-1 { order: 2 !important; }
+            .events-page-grid { grid-template-columns: 1fr; }
+        }
+
+        .event-card-page {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+        }
+        .event-card-page:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(26, 58, 107, 0.15);
+        }
+        .event-card-page .image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .event-card-page .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .event-card-page:hover .image img {
+            transform: scale(1.08);
+        }
+        .event-card-page .image .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #2C3E91;
+            color: white;
+            padding: 4px 16px;
+            border-radius: 30px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .event-card-page .content {
+            padding: 24px 28px 28px;
+        }
+        .event-card-page .content h3 {
+            font-size: 1.2rem;
+            color: #1A3A6B;
+            margin-bottom: 10px;
+        }
+        .event-card-page .content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+        .event-card-page .content .features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 16px;
+            margin-bottom: 20px;
+        }
+        .event-card-page .content .features span {
+            font-size: 0.85rem;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .event-card-page .content .features span i {
+            color: #2C3E91;
+        }
+        .event-card-page .content .btn {
+            width: 100%;
+            justify-content: center;
         }
     </style>
 </head>
@@ -44,8 +180,7 @@
         <nav class="navbar">
             <div class="container nav-container">
                 <a href="../index.html" class="logo">
-                    <span class="logo-m">M</span><span class="logo-7">7</span>
-                    <span class="logo-text">COMMUNICATION</span>
+                    <img src="../images/logo.jpg" alt="M7 COMMUNICATION" class="logo-img">
                 </a>
                 <span class="logo-slogan">Événements &amp; Marketing - Gaoua, BF</span>
 
@@ -70,48 +205,77 @@
     <main>
         <section style="padding:140px 0 60px;background:linear-gradient(135deg,#0B1F3B,#1A3A6B);color:white;text-align:center;">
             <div class="container">
-                <h1 style="font-size:2.8rem;font-weight:800;">Nos <span style="color:#6A9BD8;">Événements</span></h1>
-                <p style="font-size:1.2rem;opacity:0.9;max-width:700px;margin:0 auto;">Des rendez-vous incontournables qui rythment la vie de Gaoua et du Burkina Faso.</p>
+                <h1 style="font-size:2.8rem;font-weight:800;" class="animate-fadeUp">Nos <span style="color:#6A9BD8;">Événements</span></h1>
+                <p style="font-size:1.2rem;opacity:0.9;max-width:700px;margin:0 auto;" class="animate-fadeUp delay-1">Découvrez tous nos événements et trouvez celui qui vous correspond.</p>
             </div>
         </section>
 
         <section class="section-padding">
             <div class="container">
-                <!-- Festival des Grouilleurs -->
-                <div class="event-grid">
-                    <div>
-                        <span class="badge"><i class="fas fa-calendar-alt"></i> Annuel</span>
-                        <h2>Festival des <span class="highlight">Grouilleurs</span></h2>
-                        <p style="font-size:1.05rem;line-height:1.9;color:#555;margin-bottom:16px;">
-                            Le <strong>Festival des Grouilleurs</strong> est l'événement culturel et sportif phare de Gaoua. Il célèbre les talents locaux à travers la musique, la danse, les arts et le football.
-                        </p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Compétition Maracana</li>
-                            <li><i class="fas fa-check-circle"></i> Concerts et animations musicales</li>
-                            <li><i class="fas fa-check-circle"></i> Restauration et artisanat local</li>
-                        </ul>
-                    </div>
-                    <div class="event-image-placeholder">
-                        <img src="https://via.placeholder.com/600x400/1A3A6B/FFFFFF?text=Festival+des+Grouilleurs" alt="Festival des Grouilleurs">
-                    </div>
+                <div class="section-header animate-fadeUp">
+                    <h2>Tous nos <span class="highlight">Événements</span></h2>
+                    <p class="section-subtitle">Des moments uniques à vivre à Gaoua et au Burkina Faso</p>
                 </div>
 
-                <!-- Compétition Maracana M7 -->
-                <div class="event-grid">
-                    <div class="event-image-placeholder order-1">
-                        <img src="https://via.placeholder.com/600x400/2C3E91/FFFFFF?text=Maracana+M7" alt="Compétition Maracana M7">
+                <div class="events-page-grid">
+                    <!-- Festival des Grouilleurs -->
+                    <div class="event-card-page animate-scale delay-1">
+                        <div class="image">
+                            <img src="../images/im1.jpg" alt="Festival des Grouilleurs">
+                            <span class="badge">Annuel</span>
+                        </div>
+                        <div class="content">
+                            <h3><i class="fas fa-music" style="color:#2C3E91;margin-right:8px;"></i> Festival des Grouilleurs</h3>
+                            <p>Le rendez-vous culturel et sportif de Gaoua. Célébration des talents locaux, musique, danse, et football.</p>
+                            <div class="features">
+                                <span><i class="fas fa-futbol"></i> Maracana</span>
+                                <span><i class="fas fa-microphone-alt"></i> Concerts</span>
+                                <span><i class="fas fa-calendar-alt"></i> Juillet</span>
+                            </div>
+                            <a href="../evenements/festival-grouilleurs.html" class="btn btn-primary">
+                                <i class="fas fa-info-circle"></i> Découvrir
+                            </a>
+                        </div>
                     </div>
-                    <div class="order-2">
-                        <span class="badge"><i class="fas fa-futbol"></i> Sport</span>
-                        <h2>Compétition <span class="highlight">Maracana M7</span></h2>
-                        <p style="font-size:1.05rem;line-height:1.9;color:#555;margin-bottom:16px;">
-                            La <strong>Compétition Maracana M7</strong> est le tournoi de football qui réunit les meilleures équipes du Sud-Ouest burkinabè. Un véritable tremplin pour les jeunes talents.
-                        </p>
-                        <ul>
-                            <li><i class="fas fa-check-circle"></i> Équipes venues de toute la région</li>
-                            <li><i class="fas fa-check-circle"></i> Prix et distinctions pour les vainqueurs</li>
-                            <li><i class="fas fa-check-circle"></i> Détection de jeunes talents</li>
-                        </ul>
+
+                    <!-- Compétition Maracana M7 -->
+                    <div class="event-card-page animate-scale delay-2">
+                        <div class="image">
+                            <img src="../images/maracana2.jpg" alt="Compétition Maracana M7">
+                            <span class="badge">Sport</span>
+                        </div>
+                        <div class="content">
+                            <h3><i class="fas fa-futbol" style="color:#2C3E91;margin-right:8px;"></i> Compétition Maracana M7</h3>
+                            <p>Le tournoi de football qui rassemble les jeunes talents du Sud-Ouest burkinabè. Esprit d'équipe et fair-play.</p>
+                            <div class="features">
+                                <span><i class="fas fa-trophy"></i> Prix</span>
+                                <span><i class="fas fa-users"></i> Équipes</span>
+                                <span><i class="fas fa-calendar-alt"></i> Août</span>
+                            </div>
+                            <a href="../evenements/maracana-m7.html" class="btn btn-primary">
+                                <i class="fas fa-info-circle"></i> Découvrir
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Formation Jeunesse -->
+                    <div class="event-card-page animate-scale delay-3">
+                        <div class="image">
+                            <img src="../images/im5.jpg" alt="Formation Jeunesse">
+                            <span class="badge">Formation</span>
+                        </div>
+                        <div class="content">
+                            <h3><i class="fas fa-graduation-cap" style="color:#2C3E91;margin-right:8px;"></i> Formation Jeunesse</h3>
+                            <p>Ateliers de formation en communication, marketing digital et entrepreneuriat pour les jeunes de Gaoua.</p>
+                            <div class="features">
+                                <span><i class="fas fa-chalkboard-teacher"></i> Experts</span>
+                                <span><i class="fas fa-certificate"></i> Certificats</span>
+                                <span><i class="fas fa-calendar-alt"></i> Septembre</span>
+                            </div>
+                            <a href="../evenements/formation-jeunesse.html" class="btn btn-primary">
+                                <i class="fas fa-info-circle"></i> Découvrir
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,8 +287,7 @@
             <div class="footer-grid">
                 <div class="footer-col">
                     <div class="footer-logo">
-                        <span class="logo-m">M</span><span class="logo-7">7</span>
-                        <span class="logo-text">COMMUNICATION</span>
+                        <img src="../images/logo.jpg" alt="M7 COMMUNICATION" style="height:50px;width:auto;filter:brightness(0) invert(1);">
                     </div>
                     <p class="footer-desc">Agence événementielle et marketing digital basée à Gaoua, Burkina Faso.</p>
                     <div class="footer-social">
