@@ -11,7 +11,97 @@
     <link rel="stylesheet" href="css/style.css">
     
     <style>
-        /* Styles supplémentaires pour garantir le fonctionnement */
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.85); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(44, 62, 145, 0.2); }
+            50% { box-shadow: 0 0 40px rgba(44, 62, 145, 0.4); }
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(100px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes zoomIn {
+            from { transform: scale(1.1); }
+            to { transform: scale(1); }
+        }
+
+        .animate-fadeUp {
+            opacity: 0;
+            animation: fadeInUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeDown {
+            opacity: 0;
+            animation: fadeInDown 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeLeft {
+            opacity: 0;
+            animation: fadeInLeft 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-fadeRight {
+            opacity: 0;
+            animation: fadeInRight 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-scale {
+            opacity: 0;
+            animation: scaleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        .animate-float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+        .animate-pulse {
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+
+        /* ========== LOGO IMAGE ========== */
+        .logo-img {
+            height: 55px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .logo-img { height: 42px; }
+        }
+
+        /* ========== MENU MOBILE ========== */
         .hamburger {
             display: none;
             cursor: pointer;
@@ -21,7 +111,6 @@
             border: none;
             position: relative;
         }
-        
         .hamburger .bar {
             display: block;
             width: 28px;
@@ -29,26 +118,21 @@
             margin: 5px 0;
             background: #1A3A6B;
             border-radius: 4px;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         }
-        
         .hamburger.active .bar:nth-child(1) {
             transform: rotate(45deg) translate(5px, 5px);
         }
-        
         .hamburger.active .bar:nth-child(2) {
             opacity: 0;
+            transform: translateX(-10px);
         }
-        
         .hamburger.active .bar:nth-child(3) {
             transform: rotate(-45deg) translate(5px, -5px);
         }
         
         @media (max-width: 768px) {
-            .hamburger {
-                display: block !important;
-            }
-            
+            .hamburger { display: block !important; }
             .nav-menu {
                 position: fixed !important;
                 top: 0 !important;
@@ -59,23 +143,16 @@
                 background: #FFFFFF !important;
                 flex-direction: column !important;
                 padding: 80px 25px 25px !important;
-                transition: right 0.4s ease !important;
-                box-shadow: -5px 0 30px rgba(0,0,0,0.15) !important;
+                transition: right 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+                box-shadow: -5px 0 40px rgba(0,0,0,0.15) !important;
                 z-index: 9998 !important;
                 display: flex !important;
-                border-radius: 0 0 0 12px !important;
+                border-radius: 0 0 0 16px !important;
                 max-height: 420px !important;
                 overflow-y: auto !important;
             }
-            
-            .nav-menu.active {
-                right: 0 !important;
-            }
-            
-            .nav-menu li {
-                width: 100% !important;
-            }
-            
+            .nav-menu.active { right: 0 !important; }
+            .nav-menu li { width: 100% !important; }
             .nav-menu li a {
                 display: block !important;
                 padding: 12px 16px !important;
@@ -86,15 +163,12 @@
                 border-left: 3px solid transparent !important;
                 transition: 0.3s !important;
             }
-            
             .nav-menu li a:hover,
             .nav-menu li a.active {
                 color: #2C3E91 !important;
                 background: #f0f4ff !important;
                 border-left-color: #2C3E91 !important;
             }
-            
-            /* Overlay */
             .nav-overlay {
                 display: none;
                 position: fixed;
@@ -104,25 +178,207 @@
                 height: 100%;
                 background: rgba(0,0,0,0.4);
                 z-index: 9997;
+                animation: overlayFade 0.3s ease;
             }
-            
-            .nav-overlay.active {
-                display: block;
+            .nav-overlay.active { display: block; }
+            @keyframes overlayFade {
+                from { opacity: 0; }
+                to { opacity: 1; }
             }
+        }
+
+        /* ========== HERO CARROUSEL ========== */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-slides {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .hero-slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .hero-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(11, 31, 59, 0.85) 0%, rgba(26, 58, 107, 0.7) 50%, rgba(44, 62, 145, 0.6) 100%);
+        }
+
+        .hero-slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        /* Indicateurs du carrousel */
+        .hero-indicators {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+        }
+
+        .hero-indicators button {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.6);
+            background: transparent;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            padding: 0;
+        }
+
+        .hero-indicators button.active {
+            background: white;
+            border-color: white;
+            transform: scale(1.2);
+        }
+
+        .hero-indicators button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        /* Flèches de navigation */
+        .hero-arrows {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .hero-arrows button {
+            pointer-events: auto;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(8px);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-arrows button:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: white;
+            transform: scale(1.1);
+        }
+
+        /* Contenu du hero */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+
+        .hero-title .highlight {
+            color: #6A9BD8;
+            text-shadow: 0 0 30px rgba(106, 155, 216, 0.3);
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .hero-location {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: #8BB5E8;
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin: 16px 0 32px;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        @media (max-width: 992px) {
+            .hero-title { font-size: 3rem; }
+            .hero-content { text-align: center; }
+            .hero-desc { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-location { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { min-height: 500px; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1rem; }
+            .hero-desc { font-size: 0.95rem; }
+            .hero-arrows button { width: 36px; height: 36px; font-size: 0.9rem; }
+            .hero-indicators { bottom: 20px; }
+            .hero-indicators button { width: 10px; height: 10px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.8rem; }
+            .hero-arrows { padding: 0 8px; }
+            .hero-arrows button { width: 30px; height: 30px; font-size: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Overlay pour fermer le menu -->
     <div class="nav-overlay" id="navOverlay"></div>
 
     <!-- ==================== HEADER ==================== -->
-    <header class="header">
+    <header class="header animate-fadeDown">
         <nav class="navbar">
             <div class="container nav-container">
                 <a href="index.html" class="logo">
-                    <span class="logo-m">M</span><span class="logo-7">7</span>
-                    <span class="logo-text">COMMUNICATION</span>
+                    <img src="images/logo.jpg" alt="M7 COMMUNICATION" class="logo-img">
                 </a>
                 <span class="logo-slogan">Événements &amp; Marketing - Gaoua, BF</span>
 
@@ -144,63 +400,120 @@
         </nav>
     </header>
 
-    <!-- ==================== HERO ==================== -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="highlight">M7</span> COMMUNICATION
-                </h1>
-                <p class="hero-subtitle">
-                    Agence événementielle &amp; marketing digital <br>
-                    <span class="hero-location"><i class="fas fa-map-pin"></i> Gaoua, Burkina Faso</span>
-                </p>
-                <p class="hero-desc">
-                    Organisation de festivals, compétitions sportives, <br>
-                    communication et promotion de la jeunesse burkinabè.
-                </p>
-                <div class="hero-buttons">
-                    <a href="pages/evenements.html" class="btn btn-primary">
-                        <i class="fas fa-calendar-alt"></i> Nos événements
-                    </a>
-                    <a href="pages/contact.html" class="btn btn-secondary">
-                        <i class="fas fa-phone-alt"></i> Contactez-nous
-                    </a>
+    <!-- ==================== HERO CARROUSEL ==================== -->
+    <section class="hero" id="hero">
+        <div class="hero-slides" id="heroSlides">
+            <!-- Slide 1 -->
+            <div class="hero-slide" style="background-image: url('images/bifatétrophé.jpg');">
+                <div class="container hero-slide-content">
+                    <div class="hero-content">
+                        <h1 class="hero-title animate-fadeUp delay-1">
+                            <span class="highlight">M7</span> COMMUNICATION
+                        </h1>
+                        <p class="hero-subtitle animate-fadeUp delay-2">
+                            Agence événementielle &amp; marketing digital <br>
+                            <span class="hero-location"><i class="fas fa-map-pin"></i> Gaoua, Burkina Faso</span>
+                        </p>
+                        <p class="hero-desc animate-fadeUp delay-3">
+                            Organisation de festivals, compétitions sportives, <br>
+                            communication et promotion de la jeunesse burkinabè.
+                        </p>
+                        <div class="hero-buttons animate-fadeUp delay-4">
+                            <a href="pages/evenements.html" class="btn btn-primary animate-pulse">
+                                <i class="fas fa-calendar-alt"></i> Nos événements
+                            </a>
+                            <a href="pages/contact.html" class="btn btn-secondary">
+                                <i class="fas fa-phone-alt"></i> Contactez-nous
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <i class="fas fa-trophy"></i>
-                    <span class="stat-number">5+</span>
-                    <span class="stat-label">Éditions Festival</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <span class="stat-number">5000+</span>
-                    <span class="stat-label">Participants</span>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-handshake"></i>
-                    <span class="stat-number">20+</span>
-                    <span class="stat-label">Partenaires</span>
+
+            <!-- Slide 2 -->
+            <div class="hero-slide" style="background-image: url('images/im1.jpg');">
+                <div class="container hero-slide-content">
+                    <div class="hero-content">
+                        <h1 class="hero-title animate-fadeUp delay-1">
+                            <span class="highlight">Festival</span> des Grouilleurs
+                        </h1>
+                        <p class="hero-subtitle animate-fadeUp delay-2">
+                            La plus grande fête culturelle et sportive de Gaoua
+                        </p>
+                        <p class="hero-desc animate-fadeUp delay-3">
+                            Musique, danse, football et célébration des talents locaux.<br>
+                            Rejoignez-nous pour une édition inoubliable !
+                        </p>
+                        <div class="hero-buttons animate-fadeUp delay-4">
+                            <a href="evenements/festival-grouilleurs.html" class="btn btn-primary animate-pulse">
+                                <i class="fas fa-info-circle"></i> Découvrir le festival
+                            </a>
+                            <a href="pages/contact.html" class="btn btn-secondary">
+                                <i class="fas fa-ticket-alt"></i> Participer
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            <!-- Slide 3 -->
+            <div class="hero-slide" style="background-image: url('images/m7bifaté.jpg');">
+                <div class="container hero-slide-content">
+                    <div class="hero-content">
+                        <h1 class="hero-title animate-fadeUp delay-1">
+                            <span class="highlight">Compétition</span> Maracana M7
+                        </h1>
+                        <p class="hero-subtitle animate-fadeUp delay-2">
+                            Le tournoi de football des talents du Sud-Ouest
+                        </p>
+                        <p class="hero-desc animate-fadeUp delay-3">
+                            Esprit d'équipe, fair-play et découverte de jeunes talents.<br>
+                            Une compétition qui fait vibrer Gaoua !
+                        </p>
+                        <div class="hero-buttons animate-fadeUp delay-4">
+                            <a href="evenements/maracana-m7.html" class="btn btn-primary animate-pulse">
+                                <i class="fas fa-info-circle"></i> Découvrir la compétition
+                            </a>
+                            <a href="pages/contact.html" class="btn btn-secondary">
+                                <i class="fas fa-futbol"></i> S'inscrire
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicateurs -->
+        <div class="hero-indicators" id="heroIndicators">
+            <button class="active" data-slide="0"></button>
+            <button data-slide="1"></button>
+            <button data-slide="2"></button>
+        </div>
+
+        <!-- Flèches -->
+        <div class="hero-arrows">
+            <button id="prevSlide" aria-label="Précédent">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="nextSlide" aria-label="Suivant">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
     </section>
 
     <!-- ==================== ÉVÉNEMENTS ==================== -->
     <section class="events-highlight section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fadeUp">
                 <h2>Nos Événements <span class="highlight">Phare</span></h2>
                 <p class="section-subtitle">Des rendez-vous incontournables à Gaoua et au Burkina Faso</p>
             </div>
 
             <div class="events-grid">
-                <div class="event-card">
+                <!-- Festival des Grouilleurs -->
+                <div class="event-card animate-fadeLeft delay-2">
                     <div class="event-image">
-                        <img src="images/discours.jpg">
+                        <img src="images/discours.jpg" alt="Festival des Grouilleurs">
                         <span class="event-badge">Annuel</span>
                     </div>
                     <div class="event-content">
@@ -211,13 +524,16 @@
                             <li><i class="fas fa-microphone-alt"></i> Concerts et animations</li>
                             <li><i class="fas fa-utensils"></i> Restauration locale</li>
                         </ul>
-                        <a href="pages/evenements.html" class="btn btn-outline">En savoir plus</a>
+                        <a href="evenements/festival-grouilleurs.html" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> Découvrir
+                        </a>
                     </div>
                 </div>
 
-                <div class="event-card">
+                <!-- Compétition Maracana M7 -->
+                <div class="event-card animate-fadeRight delay-3">
                     <div class="event-image">
-                        <img src="https://via.placeholder.com/600x400/2C3E91/FFFFFF?text=Maracana+M7" alt="Compétition Maracana M7" loading="lazy">
+                        <img src="images/vueaerienne.jpg" alt="Compétition Maracana M7">
                         <span class="event-badge">Sport</span>
                     </div>
                     <div class="event-content">
@@ -228,7 +544,29 @@
                             <li><i class="fas fa-users"></i> Équipes locales</li>
                             <li><i class="fas fa-star"></i> Détection de talents</li>
                         </ul>
-                        <a href="pages/evenements.html" class="btn btn-outline">En savoir plus</a>
+                        <a href="evenements/maracana-m7.html" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> Découvrir
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Formation Jeunesse -->
+                <div class="event-card animate-fadeLeft delay-4">
+                    <div class="event-image">
+                        <img src="images/proteur-pco.jpg" alt="Formation Jeunesse">
+                        <span class="event-badge">Formation</span>
+                    </div>
+                    <div class="event-content">
+                        <h3><i class="fas fa-graduation-cap"></i> Formation Jeunesse</h3>
+                        <p>Ateliers de formation en communication, marketing digital et entrepreneuriat pour les jeunes de Gaoua.</p>
+                        <ul class="event-features">
+                            <li><i class="fas fa-chalkboard-teacher"></i> Formateurs experts</li>
+                            <li><i class="fas fa-certificate"></i> Certificats de formation</li>
+                            <li><i class="fas fa-handshake"></i> Réseautage</li>
+                        </ul>
+                        <a href="evenements/formation-jeunesse.html" class="btn btn-primary">
+                            <i class="fas fa-info-circle"></i> Découvrir
+                        </a>
                     </div>
                 </div>
             </div>
@@ -238,28 +576,28 @@
     <!-- ==================== ACTIONS JEUNESSE ==================== -->
     <section class="youth-actions section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fadeUp">
                 <h2>Actions pour la <span class="highlight">Jeunesse</span></h2>
                 <p class="section-subtitle">L'engagement de M7 pour l'épanouissement des jeunes burkinabè</p>
             </div>
 
             <div class="actions-grid">
-                <div class="action-card">
+                <div class="action-card animate-scale delay-2">
                     <div class="action-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3>Formations professionnelles</h3>
                     <p>Ateliers de communication, marketing digital, et gestion d'événements.</p>
                 </div>
-                <div class="action-card">
+                <div class="action-card animate-scale delay-3">
                     <div class="action-icon"><i class="fas fa-hand-holding-heart"></i></div>
                     <h3>Bourses d'études</h3>
                     <p>Soutien aux étudiants méritants du Sud-Ouest pour l'éducation supérieure.</p>
                 </div>
-                <div class="action-card">
+                <div class="action-card animate-scale delay-4">
                     <div class="action-icon"><i class="fas fa-running"></i></div>
                     <h3>Sport et citoyenneté</h3>
                     <p>Tournois et activités sportives pour promouvoir l'esprit d'équipe.</p>
                 </div>
-                <div class="action-card">
+                <div class="action-card animate-scale delay-5">
                     <div class="action-icon"><i class="fas fa-bullhorn"></i></div>
                     <h3>Entrepreneuriat jeune</h3>
                     <p>Accompagnement des porteurs de projets et mise en réseau.</p>
@@ -271,13 +609,13 @@
     <!-- ==================== TÉMOIGNAGES ==================== -->
     <section class="testimonials section-padding">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header animate-fadeUp">
                 <h2>Ils nous <span class="highlight">font confiance</span></h2>
                 <p class="section-subtitle">Témoignages de nos partenaires et bénéficiaires</p>
             </div>
 
             <div class="testimonials-grid">
-                <div class="testimonial-card">
+                <div class="testimonial-card animate-fadeLeft delay-2">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left"></i>
                         <p>"M7 COMMUNICATION a révolutionné l'organisation des événements à Gaoua. Leur professionnalisme est exemplaire."</p>
@@ -291,7 +629,7 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card">
+                <div class="testimonial-card animate-scale delay-3">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left"></i>
                         <p>"Grâce aux formations de M7, j'ai pu lancer mon agence de communication. Un véritable tremplin."</p>
@@ -305,7 +643,7 @@
                     </div>
                 </div>
 
-                <div class="testimonial-card">
+                <div class="testimonial-card animate-fadeRight delay-4">
                     <div class="testimonial-content">
                         <i class="fas fa-quote-left"></i>
                         <p>"La Compétition Maracana M7 est devenue un événement incontournable pour détecter les talents."</p>
@@ -325,9 +663,9 @@
     <!-- ==================== CTA ==================== -->
     <section class="cta-section">
         <div class="container cta-content">
-            <h2>Vous avez un projet d'événement ?</h2>
-            <p>Contactez-nous dès maintenant pour organiser votre festival, compétition sportive ou campagne de communication.</p>
-            <a href="pages/contact.html" class="btn btn-primary btn-lg">
+            <h2 class="animate-fadeUp delay-1">Vous avez un projet d'événement ?</h2>
+            <p class="animate-fadeUp delay-2">Contactez-nous dès maintenant pour organiser votre festival, compétition sportive ou campagne de communication.</p>
+            <a href="pages/contact.html" class="btn btn-primary btn-lg animate-pulse delay-3">
                 <i class="fas fa-paper-plane"></i> Discutons de votre projet
             </a>
         </div>
@@ -337,10 +675,9 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col">
+                <div class="footer-col animate-fadeUp delay-1">
                     <div class="footer-logo">
-                        <span class="logo-m">M</span><span class="logo-7">7</span>
-                        <span class="logo-text">COMMUNICATION</span>
+                        <img src="images/logo.jpg" alt="M7 COMMUNICATION" style="height:50px;width:auto;filter:brightness(0) invert(1);">
                     </div>
                     <p class="footer-desc">Agence événementielle et marketing digital basée à Gaoua, Burkina Faso.</p>
                     <div class="footer-social">
@@ -351,7 +688,7 @@
                     </div>
                 </div>
 
-                <div class="footer-col">
+                <div class="footer-col animate-fadeUp delay-2">
                     <h4>Liens rapides</h4>
                     <ul>
                         <li><a href="index.html">Accueil</a></li>
@@ -363,7 +700,7 @@
                     </ul>
                 </div>
 
-                <div class="footer-col">
+                <div class="footer-col animate-fadeUp delay-3">
                     <h4>Contact</h4>
                     <ul class="footer-contact">
                         <li><i class="fas fa-map-marker-alt"></i> Gaoua, Burkina Faso</li>
@@ -383,12 +720,84 @@
     <!-- ==================== SCRIPTS ==================== -->
     <script>
         // ============================================================
-        // SCRIPT DE MENU - INTÉGRÉ DIRECTEMENT POUR GARANTIR LE FONCTIONNEMENT
+        // CARROUSEL HERO
         // ============================================================
         (function() {
-            'use strict';
-            
-            // Attendre que le DOM soit prêt
+            let currentSlide = 0;
+            const slides = document.querySelector('.hero-slides');
+            const totalSlides = document.querySelectorAll('.hero-slide').length;
+            const indicators = document.querySelectorAll('.hero-indicators button');
+            let autoSlideInterval;
+
+            function goToSlide(index) {
+                if (index < 0) index = totalSlides - 1;
+                if (index >= totalSlides) index = 0;
+                currentSlide = index;
+                slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Mettre à jour les indicateurs
+                indicators.forEach((btn, i) => {
+                    btn.classList.toggle('active', i === currentSlide);
+                });
+            }
+
+            function nextSlide() {
+                goToSlide(currentSlide + 1);
+            }
+
+            function prevSlide() {
+                goToSlide(currentSlide - 1);
+            }
+
+            function startAutoSlide() {
+                stopAutoSlide();
+                autoSlideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function stopAutoSlide() {
+                if (autoSlideInterval) {
+                    clearInterval(autoSlideInterval);
+                    autoSlideInterval = null;
+                }
+            }
+
+            // Événements
+            document.getElementById('nextSlide').addEventListener('click', function(e) {
+                e.stopPropagation();
+                nextSlide();
+                startAutoSlide();
+            });
+
+            document.getElementById('prevSlide').addEventListener('click', function(e) {
+                e.stopPropagation();
+                prevSlide();
+                startAutoSlide();
+            });
+
+            indicators.forEach((btn) => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.dataset.slide);
+                    goToSlide(index);
+                    startAutoSlide();
+                });
+            });
+
+            // Pause au survol
+            const hero = document.getElementById('hero');
+            hero.addEventListener('mouseenter', stopAutoSlide);
+            hero.addEventListener('mouseleave', startAutoSlide);
+
+            // Démarrer le carrousel
+            startAutoSlide();
+
+            // Initialiser
+            goToSlide(0);
+        })();
+
+        // ============================================================
+        // MENU MOBILE
+        // ============================================================
+        (function() {
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', initMenu);
             } else {
@@ -396,97 +805,44 @@
             }
             
             function initMenu() {
-                console.log('Menu initialisé');
-                
                 var hamburger = document.getElementById('hamburgerBtn');
                 var navMenu = document.getElementById('navMenu');
                 var overlay = document.getElementById('navOverlay');
                 var navLinks = document.querySelectorAll('.nav-menu a');
                 
-                // Vérifier les éléments
-                if (!hamburger) {
-                    console.error('Bouton hamburger non trouvé');
-                    return;
-                }
-                if (!navMenu) {
-                    console.error('Menu non trouvé');
-                    return;
-                }
+                if (!hamburger || !navMenu) return;
                 
-                console.log('Éléments trouvés - OK');
-                
-                // Fonction pour ouvrir le menu
-                function openMenu() {
-                    hamburger.classList.add('active');
-                    navMenu.classList.add('active');
-                    if (overlay) overlay.classList.add('active');
-                    document.body.style.overflow = 'hidden';
-                    console.log('Menu ouvert');
-                }
-                
-                // Fonction pour fermer le menu
                 function closeMenu() {
                     hamburger.classList.remove('active');
                     navMenu.classList.remove('active');
                     if (overlay) overlay.classList.remove('active');
                     document.body.style.overflow = '';
-                    console.log('Menu fermé');
                 }
                 
-                // Toggle du menu
                 function toggleMenu() {
                     if (navMenu.classList.contains('active')) {
                         closeMenu();
                     } else {
-                        openMenu();
+                        hamburger.classList.add('active');
+                        navMenu.classList.add('active');
+                        if (overlay) overlay.classList.add('active');
+                        document.body.style.overflow = 'hidden';
                     }
                 }
                 
-                // Événement au clic sur le hamburger
                 hamburger.addEventListener('click', function(e) {
                     e.stopPropagation();
                     toggleMenu();
                 });
                 
-                // Fermer en cliquant sur l'overlay
-                if (overlay) {
-                    overlay.addEventListener('click', function() {
-                        closeMenu();
-                    });
-                }
+                if (overlay) overlay.addEventListener('click', closeMenu);
                 
-                // Fermer en cliquant sur un lien
                 navLinks.forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        closeMenu();
-                    });
+                    link.addEventListener('click', closeMenu);
                 });
                 
-                // Fermer avec la touche Echap
                 document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') {
-                        closeMenu();
-                    }
-                });
-                
-                // Gérer le redimensionnement
-                var resizeTimer;
-                window.addEventListener('resize', function() {
-                    clearTimeout(resizeTimer);
-                    resizeTimer = setTimeout(function() {
-                        if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
-                            closeMenu();
-                        }
-                    }, 250);
-                });
-                
-                // Lien actif
-                var currentPage = window.location.pathname.split('/').pop() || 'index.html';
-                navLinks.forEach(function(link) {
-                    var href = link.getAttribute('href').split('/').pop();
-                    if (href === currentPage) {
-                        link.classList.add('active');
-                    }
+                    if (e.key === 'Escape') closeMenu();
                 });
             }
         })();
