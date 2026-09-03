@@ -1,9 +1,8 @@
 // ============================================================
 // M7 COMMUNICATION - MAIN.JS
-// Version SIMPLIFIÉE et GARANTIE
+// Menu latéral DROIT
 // ============================================================
 
-// Attendre que le DOM soit complètement chargé
 document.addEventListener('DOMContentLoaded', function() {
     console.log('M7 COMMUNICATION - Script démarré');
 
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
 
-    // Vérifier que les éléments existent
+    // Vérification
     if (!hamburger) {
         console.error('ERREUR: .hamburger non trouvé');
         return;
@@ -25,17 +24,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Fonction pour ouvrir/fermer le menu
     function toggleMenu() {
-        console.log('Toggle menu appelé');
+        console.log('Toggle menu');
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         
-        // Bloquer/débloquer le scroll
         if (navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
-            console.log('Menu OUVERT');
+            console.log('Menu OUVERT (droite)');
         } else {
             document.body.style.overflow = '';
             console.log('Menu FERMÉ');
+        }
+    }
+
+    // Fermer le menu
+    function closeMenu() {
+        if (navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            console.log('Menu FERMÉ (via clic externe)');
         }
     }
 
@@ -49,17 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.nav-menu a');
     navLinks.forEach(function(link) {
         link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
-                toggleMenu();
-            }
+            closeMenu();
         });
     });
 
-    // Fermer le menu quand on clique en dehors
+    // Fermer le menu quand on clique en dehors (dans le vide)
     document.addEventListener('click', function(e) {
         if (navMenu.classList.contains('active')) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                toggleMenu();
+            // Si le clic n'est pas sur le menu ni sur le hamburger
+            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
+                closeMenu();
             }
         }
     });
