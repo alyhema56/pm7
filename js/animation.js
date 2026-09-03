@@ -3,8 +3,6 @@
 // ============================================================
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('M7 COMMUNICATION - Animations chargées');
-
     // ---------- FADE-IN AU SCROLL ----------
     const fadeElements = document.querySelectorAll('.fade-in');
 
@@ -26,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         fadeElements.forEach(el => observer.observe(el));
     }
 
-    // ---------- COMPTEUR DES STATS ----------
+    // ---------- COMPTEUR DES STATS (optionnel) ----------
     const statNumbers = document.querySelectorAll('.stat-number');
     if (statNumbers.length > 0) {
         const observerStats = new IntersectionObserver(function(entries) {
@@ -54,10 +52,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const timer = setInterval(() => {
             current += increment;
             if (current >= target) {
-                element.textContent = target;
+                element.textContent = target + '+';
                 clearInterval(timer);
             } else {
-                element.textContent = current;
+                element.textContent = current + '+';
             }
         }, stepTime);
     }
